@@ -1,1 +1,540 @@
-vsds
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>IoT Project: Smart Home Automation</title>
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="belowheader.css">
+    <link rel="stylesheet" href="feedback.css">
+    
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: white;
+            background-color: black;
+            overflow-x: hidden;
+        }
+
+        /* Video Background */
+        .video-bg {
+            opacity: 0.3;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the video fills the screen */
+            z-index: -1; /* Keeps the video behind all other elements */
+        }
+
+
+        
+
+        /* Circuit Diagram */
+        .circuit-diagram {
+            max-width: 800px;
+            margin: 40px 0; /* Adds space around the circuit diagram */
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.85);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+        }
+
+        .circuit-diagram:hover {
+            transform: scale(1.05); /* Enlarge by 5% */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6); /* Add shadow for depth */
+        }
+
+        .circuit-diagram img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        #circ{
+            scroll-margin-top: 170px;
+        }
+
+        /* Members Section */
+        .members-container {
+            max-width: 1000px;
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(18, 18, 18, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+        .members-container h2{
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .members {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .member {
+            flex: 1 0 calc(33.333% - 20px);
+            text-align: center;
+        }
+
+        .member img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 2px solid #007BFF;
+        }
+
+        .member p {
+            font-size: 1rem;
+        }
+
+        footer {
+            background: #000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                padding: 15px;
+            }
+        }
+
+        /* Adjustments for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px; /* Adjust body text size */
+            }
+
+            .top-section {
+                grid-template-columns: 1fr; /* Stack grid */
+            }
+
+            .feedback-form {
+                width: 90%;
+            }
+
+            .feedback-btn {
+                width: 100%;
+                padding: 12px 20px; /* Adjust button padding */
+            }
+        }
+
+        /* For very small screens (mobile phones) */
+        @media (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+
+            .feedback-form {
+                width: 100%;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        #hw:hover{
+            border: 2px solid #007BFF;
+            transition: 0.5s ease;
+        }
+        #insta{
+            text-decoration: none;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            transition: 0.5s ease-in-out;
+        }
+        #insta:hover{
+            color: #65aefb;
+        }
+        /* From Uiverse.io by vinodjangid07 */ 
+        .Btn {
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition-duration: .4s;
+        cursor: pointer;
+        position: relative;
+        background: #f09433;
+        background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+        overflow: hidden;
+        }
+
+
+
+        .svgIcon path {
+        fill: white;
+        }
+
+        .text {
+        position: absolute;
+        color: rgb(255, 255, 255);
+        width: 120px;
+        font-weight: 600;
+        opacity: 0;
+        transition-duration: .4s;
+        }
+
+
+
+
+
+
+
+    </style>
+
+</head>
+<body>
+    <video class="video-bg" autoplay muted loop>
+        <source src="24715-345209726_tiny.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+        
+        <header>
+            <div class="header-container">
+                <div class="logo">
+                    <img src="Screenshot 2024-11-28 185133.png" alt="Logo" class="logo-img">
+                    <span class="logo-text">Smart Home Automation</span>
+                </div>
+                <button class="hamburger-menu" aria-label="Menu">&#9776;</button>
+                <nav class="nav-links">
+                    <span><a href="#home" onclick="toggleFeedback()" type="submit">Feedback</a></span>
+                    <span><a href="#teams" onclick="navigateToMembers()">Teams</a></span>
+                    <span><a href="#community" onclick="scrollToComponents()">Components</a></span>
+                    <span><a href="#about" onclick="scrollToCircuit()">circuit-diagram</a></span>
+                </nav>
+            </div>
+        </header>
+        
+        <main>
+            <!-- Top Section -->
+            <div class="top-section">
+                <div id="hw" class="rectangle-box animate-left">
+                    <h2 class="hw" style="color: #65aefb;">How It Works</h2><br>
+                    <b style="font-family: verdana;"><p>Smart Fan Speed Controller Based on Room Temperature</b> <br> <br>
+
+                        This IoT-based fan speed controller automatically adjusts the fan speed based on real-time room temperature. 
+                        Using an ESP8266 (NodeMCU) microcontroller, the system reads temperature data from a DS18B20 sensor.
+                         Based on this data, the fan speed is regulated using a MOSFET to control the power supplied to a 12V DC fan.
+                          The temperature and fan status are displayed on a 2x16 I2C LCD for easy monitoring. <br><br>
+                        
+                        <b style="color: #65aefb;">Key Features:</b> <br>
+                        <b style="color: #65aefb;"><i>Remote Control:</i></b> Fan speed and temperature range settings can be adjusted through an app, allowing convenient control from anywhere.
+                        This intelligent system ensures that your room stays comfortable, with the fan working only as needed for efficient cooling.<br><br>
+                        <b style="color: #65aefb;">Automatic Speed Adjustment:</b> Fan speed changes based on the measured room temperature. <br><br>
+                        <b style="color: #65aefb;">Real-time Temperature Monitoring:</b> Temperature is continuously displayed on the LCD screen. <br><br>
+                        <b style="color: #65aefb;">Efficient Power Usage:</b> The fan operates at the required speed, optimizing energy consumption. 
+                        
+                        
+                        </p>
+                </div>
+                <div class="rectangle-box animate-right" id="componentsUsed">
+                    <h2 style="color: #65aefb;">Components Used</h2><br><br>
+                    <ul>
+                        <li>Node MCU ESP8622 Module</li>
+                        <li>DS18B20 Temperature Sensor</li>
+                        <li>16x2 LCD Display ,Breadboard</li>
+                        <li>10k Potentiometer , Resistor 10k and 4.7k</li>
+                        <li>IRF540N Mofset , 7805 Voltage Regulator IC</li>
+                        <li>12v DC Fan , 100uf & 10uf Capacitor</li>
+                        <li>12v DC Power Adapter , Connecting Wires</li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Circuit Diagram -->
+            <div class="circuit-diagram animate-center" id="circ">
+                <h2>Circuit Diagram</h2>
+                <img  src="https://images8.alphacoders.com/648/thumb-1920-648550.jpg" alt="Circuit Diagram">
+                <img style="margin-top: -1000px; width: 600px;" src="images/WhatsApp Image 2024-11-28 at 22.25.24_72e37505.jpg" alt="">
+            </div>
+
+    
+            <!-- Members Section -->
+            <div class="members-container" id="membersSection">
+                <h2>Meet Our Team</h2>
+                <div class="members">
+                    <div class="member">
+                        <img src="images/IMG-20241128-WA0007.jpg" alt="Member 1">
+                        <a id="insta" href="https://www.instagram.com/sxndeep_shetty?igsh=NHVnejZjZWI4aWV5"><p>Sandeep Shetty</p></a>
+                        
+                    </div>
+                    <div class="member">
+                        <img src="images/WhatsApp Image 2024-11-28 at 23.35.28_698ad563.jpg" alt="Member 2">
+                        <a id="insta" href="https://www.instagram.com/kousthubha_sky_?igsh=MWV1aHMxeGRsMDN1YQ=="><p>Kousthubha Yadiyala</p></a>
+                    </div>
+                    <div class="member">
+                        <img src="images/WhatsApp Image 2024-11-29 at 04.02.31_0d077720.jpg" alt="Member 3">
+                        <a id="insta" href="https://www.instagram.com/vilas04_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><p>Vilas G V</p></a>
+                    </div>
+                    <div class="member">
+                        <img src="images/IMG-20241128-WA0009.jpg" alt="Member 4">
+                        <a id="insta" href="https://www.instagram.com/nikhilnr46?igsh=MWp0ajZwZG9hNnN4dQ=="><p>Nikhil Vasista</p></a>
+                    </div>
+                    <div class="member">
+                        <img src="images/IMG-20241128-WA0010.jpg" alt="Member 5">
+                        <a id="insta" href="https://www.instagram.com/preetham680?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><p>Preetham E U</p></a>
+                    </div>
+                    <div class="member">
+                        <img src="images/IMG-20241128-WA0008.jpg" alt="Member 6">
+                        <a id="insta" href="https://www.instagram.com/akshay_chandavarkar?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><p>Akshay Chandavarkar</p></a>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Feedback Button -->
+            <button class="feedback-btn" onclick="toggleFeedback()">Give Feedback</button>
+
+            <!-- Feedback Form -->
+            <div class="feedback-form" id="feedbackForm">
+                <span class="feedback-form-close" onclick="toggleFeedback()">×</span>
+
+                <!-- Feedback Form Content -->
+                <div id="feedbackContent">
+                    <h2>We Value Your Feedback</h2>
+                    <input 
+                        type="text" 
+                        id="feedbackName" 
+                        placeholder="Your Name" 
+                        required 
+                        class="feedback-input"
+                    />
+                    <input 
+                        type="email" 
+                        id="feedbackEmail" 
+                        placeholder="Your Email" 
+                        required 
+                        class="feedback-input"
+                    />
+                    <textarea 
+                        id="feedbackMessage" 
+                        placeholder="Write your feedback here..." 
+                        required
+                    ></textarea>
+                    <button type="submit" onclick="submitFeedback()">Submit</button>
+                </div>
+
+    <!-- Thank You Message -->
+    <div id="thankYouMessage" class="hidden">
+        <div class="verification-icon">
+            ✓
+        </div>
+        <h2>Thanks for your feedback!</h2>
+    </div>
+</div>
+
+
+            
+            
+        </main>
+        <footer>
+            <p>© 2024 IoT Project | Created by [Your Name]</p>
+        </footer>
+
+        <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+        <script>
+            //hamburger menu responsive
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const navLinks = document.querySelector('.nav-links');
+
+            function toggleMenu() {
+                navLinks.classList.toggle('open');
+            }
+
+            function adjustHamburgerVisibility() {
+                if (window.innerWidth <= 768) {
+                    hamburgerMenu.style.display = 'block'; // Show hamburger menu on smaller screens
+                } else {
+                    hamburgerMenu.style.display = 'none'; // Hide hamburger menu on larger screens
+                    navLinks.classList.remove('open'); // Ensure menu closes on resizing back to larger screens
+                }
+            }
+
+            // Adjust visibility on window load and resize
+            window.addEventListener('load', adjustHamburgerVisibility);
+            window.addEventListener('resize', adjustHamburgerVisibility);
+
+            // Add event listener for toggling menu
+            hamburgerMenu.addEventListener('click', toggleMenu);
+
+            // Optional: Close menu when a link is clicked
+            navLinks.addEventListener('click', (event) => {
+                if (event.target.tagName === 'A') {
+                    navLinks.classList.remove('open');
+                }
+            });
+
+            function toggleFeedback() {
+                const form = document.getElementById('feedbackForm');
+                
+                // Toggle form visibility
+                if (form.classList.contains('open')) {
+                    form.classList.remove('open');
+                    setTimeout(() => (form.style.display = 'none'), 300); // Delay hiding until animation ends
+                } else {
+                    form.style.display = 'block';
+                    setTimeout(() => form.classList.add('open'), 0); // Allow animation to trigger
+                }
+            }
+        
+            // Close the feedback form if the user clicks outside of it
+            window.addEventListener('click', function(event) {
+                const form = document.getElementById('feedbackForm');
+                const feedbackDiv = form.querySelector('.feedback-form');
+                
+                // If the click is outside the feedback form, close it
+                if (!feedbackDiv.contains(event.target) && event.target !== form) {
+                    toggleFeedback();
+                }
+            });
+
+            
+
+        window.onload = () => {
+            setTimeout(() => {
+                document.querySelector('.animate-left').style.opacity = '1';
+            }, 500); // Delay for left box
+            setTimeout(() => {
+                document.querySelector('.animate-right').style.opacity = '1';
+            }, 1000); // Delay for right box
+            setTimeout(() => {
+                document.querySelector('.animate-center').style.opacity = '1';
+            }, 1500); // Delay for center box
+        };
+
+        function toggleFeedback() {
+            const feedbackForm = document.getElementById('feedbackForm');
+
+            if (feedbackForm.style.display === 'block') {
+                // If form is currently open, close it
+                feedbackForm.style.display = 'none';
+
+                // Reset all input fields
+                document.getElementById('feedbackName').value = '';
+                document.getElementById('feedbackEmail').value = '';
+                document.getElementById('feedbackMessage').value = '';
+
+                // Reset to the feedback content view
+                document.getElementById('feedbackContent').classList.remove('hidden');
+                document.getElementById('thankYouMessage').classList.add('hidden');
+            } else {
+                // If form is currently closed, open it
+                feedbackForm.style.display = 'block';
+            }
+        }
+
+
+        function submitFeedback() {
+            const feedbackContent = document.getElementById('feedbackContent');
+            const thankYouMessage = document.getElementById('thankYouMessage');
+
+            // Hide feedback form and display thank-you message
+            feedbackContent.classList.add('hidden');
+            thankYouMessage.classList.remove('hidden');
+        }
+        
+        
+    // Initialize EmailJS with your User ID (Get it from your EmailJS dashboard)
+            emailjs.init("indianthunder56@gmail.com");
+
+            // Listen for form submission
+            document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+                event.preventDefault();  // Prevent the default form submission behavior
+
+                // Get the feedback form data
+                var formData = {
+                    name: document.getElementById('feedbackName').value,
+                    email: document.getElementById('feedbackEmail').value,
+                    message: document.getElementById('feedbackMessage').value
+                };
+
+                // Send the email using EmailJS
+                emailjs.send("service_itisnk8", "template_9xs3084", formData)
+                .then(function(response) {
+                    console.log("SUCCESS:", response);
+                    // Show the thank you message
+                    document.getElementById('thankYouMessage').classList.remove('hidden');
+                    // Optionally, reset the form
+                    document.getElementById('feedbackForm').reset();
+                }, function(error) {
+                    console.log("FAILED:", error);
+                    alert("There was an error submitting the feedback.");
+                });
+            });
+
+
+
+
+
+        // Optional: If you want to use JavaScript for smooth scrolling instead of the CSS approach
+        function navigateToMembers() {
+            const memberSection = document.getElementById('membersSection');
+            memberSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+         // Use smooth scrolling to the Components Used section
+        function scrollToComponents() {
+           document.getElementById("componentsUsed").scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+
+        function scrollToCircuit() {
+    // Use smooth scrolling to the circuit-diagram section
+    document.getElementById("circ").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+}
+
+
+
+
+        // Scroll to the top when the page is loaded or refreshed
+            window.onload = function() {
+                window.scrollTo(0, 0);
+            };
+
+
+        </script>
+        
+        
+    </body>
+    
+
+</html>

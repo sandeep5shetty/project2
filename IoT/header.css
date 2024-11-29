@@ -1,0 +1,188 @@
+/* Header Styling */
+header {
+    font-family: 'Times New Roman', Times, serif;
+    background: #000;
+    color: white;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    z-index: 1000;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-radius: 35px;
+    padding: 0 20px;
+    outline: 0px solid #e5e7eb;
+}
+
+/* Container for Content Inside Header */
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo Styling  with resize responsiveness*/
+.logo-img {
+    width: 50px; /* Change this to a relative unit like percentage or rem */
+    height: 50px; 
+    border-radius: 50%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* On smaller screens, resize the logo */
+@media (max-width: 768px) {
+    .logo-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo-text {
+        font-size: 1.2rem; /* Adjust the font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-img {
+        width: 35px; /* Further reduce size for mobile */
+        height: 35px;
+    }
+
+    .logo-text {
+        font-size: 1rem; /* Even smaller text size */
+    }
+}
+
+.logo-img:hover {
+    transform: scale(1.2); /* Enlarges logo on hover */
+}
+
+
+
+/* Responsive Navigation */
+.nav-links {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #9CA3AF;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+
+
+.nav-links a:hover {
+    color: #65aefb;
+}
+
+/* Hamburger Menu (Hidden by Default) */
+.hamburger-menu {
+    display: none; /* Hidden on larger screens */
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1001; /* Ensure it stays above other content */
+}
+
+.hamburger-menu:hover {
+    transform: scale(1.1);
+}
+/*responsive hamburger menu nav link*/
+@media (max-width: 768px) {
+    .hamburger-menu {
+        display: block; /* Show hamburger menu on smaller screens */
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px; /* Below the header */
+        right: 0;
+        width: 200px;
+        height: auto; /* Adjust height dynamically */
+        max-height: 300px; /* Limit the height of the menu */
+        overflow-y: auto; /* Add scroll if the menu content exceeds max height */
+        flex-direction: column;
+        gap: 20px;
+        background: #000; /* Match header background */
+        transform: translateX(100%);
+        box-shadow: -2px 0 6px rgba(0, 0, 0, 0.5);
+        padding: 20px;
+        z-index: 999;
+        display: none; /* Hidden by default */
+    }
+
+    .nav-links a {
+        color: #FFF; /* Match header text color */
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    .nav-links a:hover {
+        color: #007BFF; /* Highlighted color on hover */
+    }
+
+    .nav-links.open {
+        display: flex;
+        transform: translateX(0); /* Slide in from the right */
+    }
+}
+
+
+main {
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 150px; /* Prevents content from overlapping the fixed header */
+}
+
+@media (max-width: 768px) {
+    /* Adjust the header for mobile view */
+    header {
+        width: 95%; /* Make it responsive on smaller screens */
+        height: 60px;
+        padding: 0 15px;
+    }
+
+    .nav-links {
+        gap: 3px; /* Reduce space between nav links */
+    }
+}
+
+/* Further adjust for very small screens */
+@media (max-width: 480px) {
+    header {
+        padding: 0 10px;
+        height: 50px;
+    }
+
+    .nav-links a {
+        font-size: 0.7rem;
+    }
+}
